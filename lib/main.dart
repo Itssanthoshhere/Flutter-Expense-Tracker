@@ -24,36 +24,41 @@ class ExpenseHome extends StatelessWidget {
       body: Card(
         margin: EdgeInsets.all(20.0),
         elevation: 5,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Groceries",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+        child: Padding(
+          padding: EdgeInsets.all(12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Groceries",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
 
-                Text(
-                  "Jul 22, 2026",
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  SizedBox(height: 5),
+
+                  Text(
+                    "Jul 22, 2026",
+                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+              Container(
+                child: Text(
+                  "250.0",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-              ],
-            ),
-            Container(
-              child: Text(
-                "250.0",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
               ),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              padding: EdgeInsets.all(8.0),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
