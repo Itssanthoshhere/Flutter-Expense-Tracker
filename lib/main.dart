@@ -10,7 +10,7 @@ class ExpenseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Text("Hello Sandy"));
+    return MaterialApp(home: const ExpenseHome());
   }
 }
 
@@ -19,6 +19,9 @@ class ExpenseHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Text("Hello Sandy"));
+    return Scaffold(
+      appBar: AppBar(title: Text("Expense Tracker")),
+      body: Text("Body Area"),
+    );
   }
 }
