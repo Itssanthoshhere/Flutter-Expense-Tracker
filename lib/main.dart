@@ -30,10 +30,23 @@ class ExpenseHome extends StatelessWidget {
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Text("Groceries"), Text("Jul 22, 2026")],
+              children: [
+                Text(
+                  "Groceries",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+
+                Text(
+                  "Jul 22, 2026",
+                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                ),
+              ],
             ),
             Container(
-              child: Text("250.0"),
+              child: Text(
+                "250.0",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.blue),
                 borderRadius: BorderRadius.circular(5.0),
