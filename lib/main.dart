@@ -10,7 +10,7 @@ class ExpenseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const ExpenseHome());
+    return MaterialApp(home: const AddExpense());
   }
 }
 
@@ -84,6 +84,28 @@ class ExpenseCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5.0),
               ),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AddExpense extends StatelessWidget {
+  const AddExpense({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Add Expense")),
+      body: Form(
+        child: Column(
+          children: [
+            TextFormField(decoration: InputDecoration(labelText: "Title")),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: "Amount"),
             ),
           ],
         ),
