@@ -22,6 +22,8 @@ class ExpenseHome extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Expense Tracker")),
       body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(children: [Text("Groceries"), Text("Jul 22, 2026")]),
           Text("250.0"),
