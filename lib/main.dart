@@ -21,7 +21,12 @@ class ExpenseHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Expense Tracker")),
-      body: Text("Body Area"),
+      body: Row(
+        children: [
+          Column(children: [Text("Groceries"), Text("Jul 22, 2026")]),
+          Text("250.0"),
+        ],
+      ),
     );
   }
 }
