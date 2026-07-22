@@ -21,20 +21,27 @@ class ExpenseHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Expense Tracker")),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(children: [Text("Groceries"), Text("Jul 22, 2026")]),
-          Container(
-            child: Text("250.0"),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.blue),
-              borderRadius: BorderRadius.circular(5.0),
+      body: Card(
+        margin: EdgeInsets.all(20.0),
+        elevation: 5,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [Text("Groceries"), Text("Jul 22, 2026")],
             ),
-            padding: EdgeInsets.all(8.0),
-          ),
-        ],
+            Container(
+              child: Text("250.0"),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              padding: EdgeInsets.all(8.0),
+            ),
+          ],
+        ),
       ),
     );
   }
