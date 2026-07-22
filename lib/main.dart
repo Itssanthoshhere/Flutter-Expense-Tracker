@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo for Android'),
     );
   }
 }
@@ -105,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: .center,
           children: [
             const Text('You have pushed the button this many times:'),
+            const Text('Mobile App Development!'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
