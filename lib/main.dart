@@ -104,26 +104,32 @@ class _AddExpenseState extends State<AddExpense> {
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
 
+  final _formKey = GlobalKey<FormState>();
+
   void showDatepicker() async {
     final pickedDate = await showDatePicker(
       context: context,
       firstDate: DateTime(2020),
       lastDate: DateTime.now(),
-      initialDate: DateTime.now(),
+      initialDate: _selectedDate == null ? DateTime.now() : _selectedDate,
     );
 
     if (pickedDate != null) {
-      _selectedDate = pickedDate;
+      setState(() {
+        _selectedDate = pickedDate;
+      });
     }
 
     print("Selected Date $pickedDate");
   }
 
   void submitForm() {
-    final title = _titleController.text;
-    final amount = double.parse(_amountController.text);
+    if ((_formKey.currentState?.validate() ?? false) && _selectedDate != null) {
+      final title = _titleController.text;
+      final amount = double.parse(_amountController.text);
 
-    print("Title: $title, Amount: $amount, Date: $_selectedDate");
+      print("Title: $title, Amount: $amount, Date: $_selectedDate");
+    }
   }
 
   @override
@@ -131,17 +137,40 @@ class _AddExpenseState extends State<AddExpense> {
     return Scaffold(
       appBar: AppBar(title: Text("Add Expense")),
       body: Form(
+        key: _formKey,
         child: Column(
           children: [
             TextFormField(
               controller: _titleController,
               decoration: InputDecoration(labelText: "Title"),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please enter a title";
+                }
+                return null;
+              },
             ),
             TextFormField(
               controller: _amountController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: "Amount"),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please enter an amount";
+                }
+                if (double.tryParse(value) == null) {
+                  return "Please enter a valid number";
+                }
+                return null;
+              },
             ),
+
+            Text(
+              _selectedDate == null
+                  ? "No Date Chosen"
+                  : "Picked Date: ${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}",
+            ),
+
             TextButton(
               onPressed: () => showDatepicker(),
               child: Text("Choose Data"),
