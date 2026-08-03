@@ -92,8 +92,24 @@ class ExpenseCard extends StatelessWidget {
   }
 }
 
-class AddExpense extends StatelessWidget {
+class AddExpense extends StatefulWidget {
   const AddExpense({super.key});
+
+  @override
+  State<AddExpense> createState() => _AddExpenseState();
+}
+
+class _AddExpenseState extends State<AddExpense> {
+  void showDatepicker() async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+      initialDate: DateTime.now(),
+    );
+
+    print("Selected Date $pickedDate");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +122,10 @@ class AddExpense extends StatelessWidget {
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: "Amount"),
+            ),
+            TextButton(
+              onPressed: () => showDatepicker(),
+              child: Text("Choose Data"),
             ),
           ],
         ),
