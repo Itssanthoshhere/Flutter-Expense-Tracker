@@ -100,6 +100,10 @@ class AddExpense extends StatefulWidget {
 }
 
 class _AddExpenseState extends State<AddExpense> {
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  DateTime? _selectedDate;
+
   void showDatepicker() async {
     final pickedDate = await showDatePicker(
       context: context,
@@ -108,7 +112,18 @@ class _AddExpenseState extends State<AddExpense> {
       initialDate: DateTime.now(),
     );
 
+    if (pickedDate != null) {
+      _selectedDate = pickedDate;
+    }
+
     print("Selected Date $pickedDate");
+  }
+
+  void submitForm() {
+    final title = _titleController.text;
+    final amount = double.parse(_amountController.text);
+
+    print("Title: $title, Amount: $amount, Date: $_selectedDate");
   }
 
   @override
@@ -118,14 +133,22 @@ class _AddExpenseState extends State<AddExpense> {
       body: Form(
         child: Column(
           children: [
-            TextFormField(decoration: InputDecoration(labelText: "Title")),
             TextFormField(
+              controller: _titleController,
+              decoration: InputDecoration(labelText: "Title"),
+            ),
+            TextFormField(
+              controller: _amountController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: "Amount"),
             ),
             TextButton(
               onPressed: () => showDatepicker(),
               child: Text("Choose Data"),
+            ),
+            ElevatedButton(
+              onPressed: () => submitForm(),
+              child: Text("Add Expense"),
             ),
           ],
         ),
