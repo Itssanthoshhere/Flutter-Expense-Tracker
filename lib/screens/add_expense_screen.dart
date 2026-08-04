@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
+class AddExpenseScreen extends StatefulWidget {
+  const AddExpenseScreen({super.key});
 
   @override
-  State<AddExpense> createState() => _AddExpenseState();
+  State<AddExpenseScreen> createState() => _AddExpenseScreenState();
 }
 
-class _AddExpenseState extends State<AddExpense> {
+class _AddExpenseScreenState extends State<AddExpenseScreen> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
