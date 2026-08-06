@@ -63,7 +63,7 @@ class ExpenseCard extends StatelessWidget {
 
                 Text(
                   date,
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 16, color: Colors.red[300]),
                 ),
               ],
             ),
