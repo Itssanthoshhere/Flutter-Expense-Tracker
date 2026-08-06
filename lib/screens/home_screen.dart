@@ -1,3 +1,4 @@
+import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,8 +9,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final newExpense = await Navigator.pushNamed(context, "/add-expense");
-          print("New Expense: $newExpense");
+          final newExpense =
+              await Navigator.pushNamed(context, "/add-expense")
+                  as ExpenseModel;
+          print(
+            "New Expense: ${newExpense.title}, ${newExpense.amount}, ${newExpense.date}",
+          );
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.indigoAccent,
