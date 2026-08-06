@@ -12,6 +12,11 @@ class ExpenseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const HomeScreen());
+    return MaterialApp(
+      routes: {
+        "/": (context) => HomeScreen(),
+        "/add-expense": (context) => AddExpenseScreen(),
+      },
+    );
   }
 }

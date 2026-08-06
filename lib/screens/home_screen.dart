@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => {Navigator.pushNamed(context, "/add-expense")},
         child: Icon(Icons.add),
         backgroundColor: Colors.indigoAccent,
         foregroundColor: Colors.white,
