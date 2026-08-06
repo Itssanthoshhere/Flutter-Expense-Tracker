@@ -1,3 +1,4 @@
+import 'package:expense_tracker/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/add_expense_screen.dart';
 
@@ -11,6 +12,6 @@ class ExpenseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const AddExpenseScreen());
+    return MaterialApp(home: const HomeScreen());
   }
 }

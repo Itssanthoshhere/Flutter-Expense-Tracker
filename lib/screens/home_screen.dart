@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-class ExpenseHome extends StatelessWidget {
-  const ExpenseHome({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: Icon(Icons.add),
+        backgroundColor: Colors.indigoAccent,
+        foregroundColor: Colors.white,
+      ),
+
       appBar: AppBar(title: Text("Expense Tracker")),
       body: Column(
         children: [
