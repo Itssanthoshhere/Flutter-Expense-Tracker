@@ -36,7 +36,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       final title = _titleController.text;
       final amount = double.parse(_amountController.text);
 
-      print("Title: $title, Amount: $amount, Date: $_selectedDate");
+      // print("Title: $title, Amount: $amount, Date: $_selectedDate");
+
+      final newExpense = {
+        "title": title,
+        "amount": amount,
+        "date": _selectedDate,
+      };
+
+      Navigator.pop(context, newExpense);
     }
   }
 
