@@ -2,7 +2,16 @@ import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  List<ExpenseModel> expenses = [
+    ExpenseModel(title: "Groceries", amount: 250.0, date: DateTime.now()),
+    ExpenseModel(
+      title: "Electricity Bill",
+      amount: 1250.0,
+      date: DateTime.now().subtract(Duration(days: 1)),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +31,27 @@ class HomeScreen extends StatelessWidget {
       ),
 
       appBar: AppBar(title: Text("Expense Tracker")),
-      body: Column(
-        children: [
-          ExpenseCard(title: "Groceries", date: "Jul 23, 2026", amount: 250.0),
-          ExpenseCard(
-            title: "Electricity Bill",
-            date: "Jul 25, 2026",
-            amount: 1250,
-          ),
-        ],
+
+      // body: Column(
+      //   children: [
+      //     ExpenseCard(title: "Groceries", date: "Jul 23, 2026", amount: 250.0),
+      //     ExpenseCard(
+      //       title: "Electricity Bill",
+      //       date: "Jul 25, 2026",
+      //       amount: 1250,
+      //     ),
+      //   ],
+      // ),
+      body: ListView.builder(
+        itemCount: expenses.length,
+        itemBuilder: (context, index) {
+          final expense = expenses[index];
+          return ExpenseCard(
+            title: expense.title,
+            date: expense.date,
+            amount: expense.amount,
+          );
+        },
       ),
     );
   }
@@ -38,7 +59,7 @@ class HomeScreen extends StatelessWidget {
 
 class ExpenseCard extends StatelessWidget {
   final String title;
-  final String date;
+  final DateTime? date;
   final double amount;
 
   const ExpenseCard({
@@ -70,7 +91,7 @@ class ExpenseCard extends StatelessWidget {
                 SizedBox(height: 5),
 
                 Text(
-                  date,
+                  "{$date.!month}, ${date!.day}, ${date!.year}",
                   style: TextStyle(fontSize: 16, color: Colors.red[300]),
                 ),
               ],
