@@ -1,5 +1,6 @@
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -62,6 +63,10 @@ class ExpenseCard extends StatelessWidget {
   final DateTime? date;
   final double amount;
 
+  String get formattedDate {
+    return date == null ? "No Date" : DateFormat("MMM d, y").format(date!);
+  }
+
   const ExpenseCard({
     required this.title,
     required this.date,
@@ -80,21 +85,24 @@ class ExpenseCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
 
-                SizedBox(height: 5),
+                  SizedBox(height: 5),
 
-                Text(
-                  "{$date.!month}, ${date!.day}, ${date!.year}",
-                  style: TextStyle(fontSize: 16, color: Colors.red[300]),
-                ),
-              ],
+                  Text(
+                    formattedDate,
+                    style: TextStyle(fontSize: 16, color: Colors.red[300]),
+                  ),
+                ],
+              ),
             ),
             Container(
               child: Text(
