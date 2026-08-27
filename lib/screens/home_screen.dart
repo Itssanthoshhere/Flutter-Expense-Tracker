@@ -1,6 +1,7 @@
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:hive/hive.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -10,14 +11,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<ExpenseModel> expenses = [
-    ExpenseModel(title: "Groceries", amount: 250.0, date: DateTime.now()),
-    ExpenseModel(
-      title: "Electricity Bill",
-      amount: 1250.0,
-      date: DateTime.now().subtract(Duration(days: 1)),
-    ),
-  ];
+  // final List<ExpenseModel> expenses = [
+  //   ExpenseModel(title: "Groceries", amount: 250.0, date: DateTime.now()),
+  //   ExpenseModel(
+  //     title: "Electricity Bill",
+  //     amount: 1250.0,
+  //     date: DateTime.now().subtract(Duration(days: 1)),
+  //   ),
+  // ];
+
+  final expenseBox = Hive.box<ExpenseModel>("expenses");
+  List<ExpenseModel> get expenses => expenseBox.values.toList();
 
   final double totalBudget = 5000.0;
   double get totalExpense =>
@@ -39,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
           // );
 
           setState(() {
-            expenses.add(newExpense);
+            // expenses.add(newExpense);
+            expenseBox.add(newExpense);
           });
         },
         child: Icon(Icons.add),
@@ -99,7 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       "₹${balance.toStringAsFixed(2)}",
                       style: TextStyle(
-                        color: balance >= 0 ? Colors.greenAccent : Colors.redAccent,
+                        color: balance >= 0
+                            ? Colors.greenAccent
+                            : Colors.redAccent,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
