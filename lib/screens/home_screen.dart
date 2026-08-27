@@ -19,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
 
+  final double totalBudget = 5000.0;
+  double get totalExpense =>
+      expenses.fold(0.0, (sum, item) => sum + item.amount);
+
+  double get balance => totalBudget - totalExpense;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,16 +59,70 @@ class _HomeScreenState extends State<HomeScreen> {
       //     ),
       //   ],
       // ),
-      body: ListView.builder(
-        itemCount: expenses.length,
-        itemBuilder: (context, index) {
-          final expense = expenses[index];
-          return ExpenseCard(
-            title: expense.title,
-            date: expense.date,
-            amount: expense.amount,
-          );
-        },
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.indigoAccent,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      "Total Expense",
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "₹${totalExpense.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "Balance",
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "₹${balance.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        color: balance >= 0 ? Colors.greenAccent : Colors.redAccent,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: expenses.length,
+              itemBuilder: (context, index) {
+                final expense = expenses[index];
+                return ExpenseCard(
+                  title: expense.title,
+                  date: expense.date,
+                  amount: expense.amount,
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
