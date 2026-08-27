@@ -2,9 +2,14 @@ import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   List<ExpenseModel> expenses = [
     ExpenseModel(title: "Groceries", amount: 250.0, date: DateTime.now()),
     ExpenseModel(
@@ -22,9 +27,14 @@ class HomeScreen extends StatelessWidget {
           final newExpense =
               await Navigator.pushNamed(context, "/add-expense")
                   as ExpenseModel;
-          print(
-            "New Expense: ${newExpense.title}, ${newExpense.amount}, ${newExpense.date}",
-          );
+
+          // print(
+          //   "New Expense: ${newExpense.title}, ${newExpense.amount}, ${newExpense.date}",
+          // );
+
+          setState(() {
+            expenses.add(newExpense);
+          });
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.indigoAccent,
