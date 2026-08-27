@@ -29,6 +29,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   double get balance => totalBudget - totalExpense;
 
+  void confirmDelete(int index) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Delete Expense"),
+        content: Text("Are you sure want to delete?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await expenseBox.deleteAt(index);
+              setState(() {}); // refresh the UI after delete
+              Navigator.pop(context);
+            },
+            child: Text("Delete"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: expense.title,
                   date: expense.date,
                   amount: expense.amount,
+                  onDelete: () => confirmDelete(index),
                 );
               },
             ),
@@ -139,6 +170,7 @@ class ExpenseCard extends StatelessWidget {
   final String title;
   final DateTime? date;
   final double amount;
+  final VoidCallback onDelete;
 
   String get formattedDate {
     return date == null ? "No Date" : DateFormat("MMM d, y").format(date!);
@@ -148,6 +180,7 @@ class ExpenseCard extends StatelessWidget {
     required this.title,
     required this.date,
     required this.amount,
+    required this.onDelete,
     super.key,
   });
 
@@ -168,7 +201,7 @@ class ExpenseCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    title.length > 12 ? '${title.substring(0, 12)}...' : title,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
 
@@ -176,7 +209,10 @@ class ExpenseCard extends StatelessWidget {
 
                   Text(
                     formattedDate,
-                    style: TextStyle(fontSize: 16, color: Colors.red[300]),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 155, 55, 55),
+                    ),
                   ),
                 ],
               ),
@@ -191,6 +227,13 @@ class ExpenseCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5.0),
               ),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+            ),
+            Container(
+              padding: EdgeInsetsDirectional.only(start: 30.0),
+              child: IconButton(
+                onPressed: onDelete,
+                icon: Icon(Icons.delete, color: Colors.red),
+              ),
             ),
           ],
         ),
